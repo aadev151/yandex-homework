@@ -1,15 +1,32 @@
-# First Homework for Yandex Intensive
+# Yandex.Homework
 
-## Установка проекта
+## Этот проект сделан на Django
 
-Скачайте проект!
+В данном файле описана подробная инструкция по запуску проекта.
 
-Чтобы запустить проект, воспользуйтесь следующей последовательностью команд, запущенных из терминала в папке main.
+1. Скачайте проект с Гитхаба. Для этого нажмите зеленую кнопку `Code` и выберите опцию `Download ZIP`
 
-1. `pip3 install -r requirements.txt` для установки Django
+![Скачивание кода](https://aadev151.tech/static/for_other_projects/download_gh_proj.png)
 
-2. `cd homework` для перехода в папку проекта
+Чтобы запустить проект, воспользуйтесь следующей последовательностью команд, запущенных в терминале из внешней папки (`yandex-homework-main`):
 
-3. `python3 manage.py runserver` для запуска программы
+1. `python3 -m venv venv` для создания виртуального окружения (чтобы версии установленных модулей в данном проекте и других проектах на Вашем компьютере не конфликтовали)
+2. `source venv/bin/activate` для перехода в виртуальное окружение
+3. `pip3 install -r requirements.txt` для установки необходимых в проекте модулей
+4. `cd homework` для перехода в основную папку проекта
+5. `python3 manage.py runserver` для запуска проекта
 
-Затем, после перехода на http://127.0.0.1:8000 или http://localhost:8000, Вы увидите взлетающую ракету - признак того, что все сделано правильно
+После этого Вы получите сообщение в терминале:
+```
+Watching for file changes with StatReloader
+Performing system checks...
+
+System check identified no issues (0 silenced).
+September 24, 2022 - 11:04:56
+Django version 4.1.1, using settings 'myportfolio.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CONTROL-C.
+```
+
+Чтобы открыть сайт, посетите http://127.0.0.1:8000. Чтобы прекратить выполнение программы, нажмите Control+C.
+
