@@ -43,6 +43,8 @@ Quit the server with CONTROL-C.
 
 ## Важно! Перед запуском:
 
+Перейдите в ветку `extra` в проекте: из терминала а папке `yandex-homework-main` запустите `git checkout extra`
+
 Проект использует переменные окружения, поэтому перед запуском создайте во внешней папке (`yandex-homework-main`) файл `.env` с переменными, необходимыми для корректной работы сайта:
 ```
 SECRET_KEY="<Ваш_секретный_ключ_Django>"
@@ -52,7 +54,7 @@ ALLOWED_HOSTS="127.0.0.1|localhost" (разрешенные хосты, разд
 
 Пример использования:
 ```
-SECRET_KEY="django-insecure-..."
+SECRET_KEY="django-insecure-trmelkmfgklerngjlenvlerljktnfeklv"
 DEBUG="False"
 ALLOWED_HOSTS="127.0.0.1|localhost"
 ```
