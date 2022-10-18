@@ -54,7 +54,7 @@ ALLOWED_HOSTS="127.0.0.1|localhost" (разрешенные хосты, разд
 
 Пример использования:
 ```
-SECRET_KEY="django-insecure-trmelkmfgklerngjlenvlerljktnfeklv"
+SECRET_KEY="django-insecure-..."
 DEBUG="False"
 ALLOWED_HOSTS="127.0.0.1|localhost"
 ```
