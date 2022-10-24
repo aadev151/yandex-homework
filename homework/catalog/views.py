@@ -18,6 +18,9 @@ def item_list(request):
 
 
 def item_detail(request, pk):
+    if pk == 0:
+        return HttpResponse('It should be a positive number', status=404)
+
     return HttpResponse(
         f'<h1>Item {pk}</h1>'
         '<h2>Some info will probably some day be here</h2>'
