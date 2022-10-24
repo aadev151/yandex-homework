@@ -18,6 +18,10 @@ class StaticURLTests(TestCase):
         response = Client().get('/catalog/-20/')
         self.assertEqual(response.status_code, 404)
 
+    def test_catalog_zero_item_endpoint(self):
+        response = Client().get('/catalog/0/')
+        self.assertEqual(response.status_code, 404)
+
     def test_catalog_not_numeric_item_endpoint(self):
         response = Client().get('/catalog/azino/')
         self.assertEqual(response.status_code, 404)
