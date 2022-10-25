@@ -2,16 +2,18 @@ from pathlib import Path
 
 from decouple import config
 
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 SECRET_KEY = config('SECRET_KEY')
+if config('DEBUG').lower() in ['true', 'false']:
+    DEBUG = config('DEBUG').lower() == 'true'
+else:
+    raise ValueError(
+        'DEBUG value in .env should be either \'True\' or \'False\''
+    )
 
-if (config('DEBUG').lower() not in
-        ['true', 'false', 'yes', 'no', 't', 'f', '1', '0']):
-    raise ValueError("DEBUG value in .env is not boolean")
-
-DEBUG = config('DEBUG').lower() in ['true', 'yes', 't', '1']
 ALLOWED_HOSTS = config('ALLOWED_HOSTS').split('|')
 
 
@@ -68,16 +70,28 @@ DATABASES = {
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        'NAME': (
+            'django.contrib.auth.password_validation.'
+            'UserAttributeSimilarityValidator'
+        ),
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'NAME': (
+            'django.contrib.auth.password_validation.'
+            'MinimumLengthValidator'
+        ),
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        'NAME': (
+            'django.contrib.auth.password_validation.'
+            'CommonPasswordValidator'
+        ),
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        'NAME': (
+            'django.contrib.auth.password_validation.'
+            'NumericPasswordValidator'
+        ),
     },
 ]
 
