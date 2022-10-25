@@ -7,8 +7,8 @@ def home(request):
         '<h2>___________</h2>'
         '<p>It\'s a homepage :)'
         '<br>'
-        '<a href="/catalog">Catalog</a>'
+        '<a href="/catalog/">Catalog</a>'
         '<br>'
-        '<a href="/about">About</a>'
+        '<a href="/about/">About</a>'
         '</p>'
     )
