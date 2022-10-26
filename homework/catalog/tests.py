@@ -12,31 +12,69 @@ class StaticURLTests(TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_catalog_items_endpoint(self):
-        # Testing numeric items
-        for pk in range(1, 10000):
-            with self.subTest(f'Testing /catalog/{pk}'):
-                response = Client().get(f'/catalog/{pk}/')
-                self.assertEqual(response.status_code, 200)
 
-        # Testing a negative numeric item
-        response = Client().get('/catalog/-20/')
-        self.assertEqual(response.status_code, 404)
+        tests = tuple(
+            # Testing int items
+            [
+                {
+                    'primary_key': pk,
+                    'necessary_status': 200,
+                    'description': f'Testing /catalog/{pk}/'
+                }
+                for pk in range(1, 200)
+            ] +
 
-        # Testing item 0
-        response = Client().get('/catalog/0/')
-        self.assertEqual(response.status_code, 404)
+            # Testing float items
+            [
+                {
+                    'primary_key': pk,
+                    'necessary_status': 404,
+                    'description': f'Testing /catalog/{pk}/'
+                }
+                for pk in [.05 * i for i in range(1, 41)]
+            ] +
 
-        # Testing float items
-        primary_keys = [.05 * i for i in range(1, 41)]
-        for pk in primary_keys:
-            with self.subTest(f'Testing /catalog/{pk}'):
-                response = Client().get(f'/catalog/{pk}/')
-                self.assertEqual(response.status_code, 404)
+            # Testing zero and negative int items
+            [
+                {
+                    'primary_key': pk,
+                    'necessary_status': 404,
+                    'description': f'Testing /catalog/{pk}/'
+                }
+                for pk in range(-20, 1)
+            ] +
 
-        # Testing a not numeric item
-        response = Client().get('/catalog/azino/')
-        self.assertEqual(response.status_code, 404)
+            # Testing strings and mixed items
+            [
+                {
+                    'primary_key': 'azino',
+                    'necessary_status': 404,
+                    'description': 'Testing /catalog/azino/'
+                },
+                {
+                    'primary_key': 'hey123',
+                    'necessary_status': 404,
+                    'description': 'Testing /catalog/hey123/'
+                },
+                {
+                    'primary_key': 'p12i',
+                    'necessary_status': 404,
+                    'description': 'Testing /catalog/p12i/'
+                },
+                {
+                    'primary_key': '1234567u',
+                    'necessary_status': 404,
+                    'description': 'Testing /catalog/1234567u/'
+                }
+            ]
+        )
 
-        # Testing a mixed item
-        response = Client().get('/catalog/azino777/')
-        self.assertEqual(response.status_code, 404)
+        for test in tests:
+            with self.subTest(test['description']):
+                response = Client().get(
+                    f'/catalog/{test["primary_key"]}/'
+                )
+                self.assertEqual(
+                    response.status_code,
+                    test['necessary_status']
+                )
