@@ -29,6 +29,11 @@ class StaticURLTests(TestCase):
                 'description': 'Testing negative int'
             },
             {
+                'primary_key': 0,
+                'necessary_status': 404,
+                'description': 'Testing zero'
+            },
+            {
                 'primary_key': 'azino',
                 'necessary_status': 404,
                 'description': 'Testing string'
