@@ -1,0 +1,32 @@
+[
+{
+    "model": "catalog.category",
+    "pk": 1,
+    "fields": {
+        "name": "Кеды",
+        "is_published": true,
+        "slug": "sneakers-first-type",
+        "weight": 100
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 2,
+    "fields": {
+        "name": "Кроссовки",
+        "is_published": true,
+        "slug": "sneakers-second-type",
+        "weight": 100
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 3,
+    "fields": {
+        "name": "Полукеды",
+        "is_published": true,
+        "slug": "sneakers-third-type",
+        "weight": 100
+    }
+}
+]

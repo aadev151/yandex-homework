@@ -1,0 +1,74 @@
+[
+{
+    "model": "catalog.item",
+    "pk": 1,
+    "fields": {
+        "name": "Adidas Campus South Park \"Towelie\"",
+        "is_published": true,
+        "text": "Полукеды Adidas Campus, выполненные в стиле Полотенчика из сериала \"Южный парк\". Просто превосходно для выпендрёжа)",
+        "category": 1,
+        "tags": [
+            1,
+            6,
+            7
+        ]
+    }
+},
+{
+    "model": "catalog.item",
+    "pk": 2,
+    "fields": {
+        "name": "Nike \"Strawberry Cough\"",
+        "is_published": true,
+        "text": "Высокие Nike Dunk, выпущенные в октябре 2021 года и продаваемые изначально за $110. Просто роскошно для Вас!",
+        "category": 3,
+        "tags": [
+            4,
+            5,
+            6,
+            8
+        ]
+    }
+},
+{
+    "model": "catalog.item",
+    "pk": 3,
+    "fields": {
+        "name": "Adidas Superstar \"Pride\"",
+        "is_published": true,
+        "text": "Превосходно для любителей разноцветных адиков",
+        "category": 1,
+        "tags": [
+            7
+        ]
+    }
+},
+{
+    "model": "catalog.item",
+    "pk": 4,
+    "fields": {
+        "name": "Nike Air Force 1 x Supreme",
+        "is_published": true,
+        "text": "Самые культовые сникеры от американского уличного бренда Supreme. Просто, но роскошно",
+        "category": 3,
+        "tags": [
+            3,
+            8
+        ]
+    }
+},
+{
+    "model": "catalog.item",
+    "pk": 5,
+    "fields": {
+        "name": "Nike Air Force 1 x Supreme (black)",
+        "is_published": true,
+        "text": "Самые культовые сникеры от американского уличного бренда Supreme. Просто, но роскошно",
+        "category": 3,
+        "tags": [
+            2,
+            8
+        ]
+    }
+}
+]
