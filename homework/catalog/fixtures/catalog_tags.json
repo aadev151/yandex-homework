@@ -1,0 +1,74 @@
+[
+{
+    "model": "catalog.tag",
+    "pk": 1,
+    "fields": {
+        "name": "Фиолетовый",
+        "is_published": true,
+        "slug": "purple"
+    }
+},
+{
+    "model": "catalog.tag",
+    "pk": 2,
+    "fields": {
+        "name": "Черный",
+        "is_published": true,
+        "slug": "black"
+    }
+},
+{
+    "model": "catalog.tag",
+    "pk": 3,
+    "fields": {
+        "name": "Белый",
+        "is_published": true,
+        "slug": "white"
+    }
+},
+{
+    "model": "catalog.tag",
+    "pk": 4,
+    "fields": {
+        "name": "Красный",
+        "is_published": true,
+        "slug": "red"
+    }
+},
+{
+    "model": "catalog.tag",
+    "pk": 5,
+    "fields": {
+        "name": "Зеленый",
+        "is_published": true,
+        "slug": "green"
+    }
+},
+{
+    "model": "catalog.tag",
+    "pk": 6,
+    "fields": {
+        "name": "4/20",
+        "is_published": true,
+        "slug": "four-twenty"
+    }
+},
+{
+    "model": "catalog.tag",
+    "pk": 7,
+    "fields": {
+        "name": "Adidas",
+        "is_published": true,
+        "slug": "adidas"
+    }
+},
+{
+    "model": "catalog.tag",
+    "pk": 8,
+    "fields": {
+        "name": "Nike",
+        "is_published": true,
+        "slug": "nike"
+    }
+}
+]
