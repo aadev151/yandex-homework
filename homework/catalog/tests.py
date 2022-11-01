@@ -91,19 +91,35 @@ class ModelsTest(TestCase):
         self.assertEqual(Item.objects.count(), item_count)
 
     def test_able_create_item(self):
-        item_count = Item.objects.count()
-
-        item = Item(
-            name='Test item',
-            category=self.category,
-            text='Test description (роскошно)'
+        tests = (
+            (
+                Item(
+                    name='Test item',
+                    category=self.category,
+                    text='Test description роскошно'
+                ),
+                'Testing with "роскошно"'
+            ),
+            (
+                Item(
+                    name='Test item',
+                    category=self.category,
+                    text='Test description превосходно'
+                ),
+                'Testing with "превосходно"'
+            )
         )
 
-        item.full_clean()
-        item.save()
-        item.tags.add(self.tag)
+        for test in tests:
+            with self.subTest(test[1]):
+                item_count = Item.objects.count()
 
-        self.assertEqual(Item.objects.count(), item_count + 1)
+                item = test[0]
+                item.full_clean()
+                item.save()
+                item.tags.add(self.tag)
+
+                self.assertEqual(Item.objects.count(), item_count + 1)
 
     # Testing Category model
     def test_unable_create_category(self):

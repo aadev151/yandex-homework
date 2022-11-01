@@ -19,7 +19,7 @@ class Migration(migrations.Migration):
                 ('is_published', models.BooleanField(default=True, help_text='Shows whether the category is published (default is True)')),
                 ('name', models.CharField(help_text='The name of the category. Max length is 150 symbols', max_length=150)),
                 ('slug', models.SlugField(help_text='The slug (unique id). Max length is 200 symbols. Only contains latin letters, numbers, and symbols: - _', max_length=200, unique=True)),
-                ('weight', models.PositiveSmallIntegerField(default=100, help_text='The weight of the category. Should be in range [1, 32766]. Default is 100.', validators=[catalog.validators.validate_weight])),
+                ('weight', models.PositiveSmallIntegerField(default=100, help_text='The weight of the category. Should be in range [1, 32766]. Default is 100.')),
             ],
         ),
         migrations.CreateModel(
