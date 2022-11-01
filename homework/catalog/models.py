@@ -1,6 +1,6 @@
 from django.db import models
 
-from .core_models import CommonDataAbstractModel, SlugAbstractModel
+from Core.models import CommonDataAbstractModel, SlugAbstractModel
 from .validators import validate_must_be_param, validate_weight
 
 
@@ -17,7 +17,7 @@ class Category(CommonDataAbstractModel, SlugAbstractModel):
     weight = models.PositiveSmallIntegerField(
         default=100,
         validators=[
-            validate_weight,
+            validate_weight
         ],
         help_text=('Вес категории. Должен находиться в пределах '
                    '[1, 32766]. По умолчанию 100.'),
@@ -38,7 +38,7 @@ class Item(CommonDataAbstractModel):
             validate_must_be_param('превосходно', 'роскошно')
         ],
         help_text=('Информация о товаре. '
-                   'Должна содержать слова \'превосходно\' или \'роскошно\''),
+                   'Должна содержать слова "превосходно" или "роскошно"'),
         verbose_name='Описание товара'
     )
 
