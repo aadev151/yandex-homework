@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 
-
+# TODO: requirements.txt
 def item_list(request):
     return HttpResponse(
         '<h1>Catalog of Items</h1>'

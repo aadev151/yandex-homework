@@ -1,4 +1,6 @@
 from django.db import models
+from django.utils.safestring import mark_safe
+from sorl.thumbnail import get_thumbnail
 
 from Core.models import CommonDataAbstractModel, SlugAbstractModel
 from .validators import validate_must_be_param, validate_weight
@@ -53,6 +55,22 @@ class Item(CommonDataAbstractModel):
         help_text='Теги к товару',
         verbose_name='Теги'
     )
+
+    upload = models.ImageField(upload_to='uploads/%Y/%m')
+
+    @property
+    def get_img(self):
+        return get_thumbnail(self.upload, '400x300', crop='center', quality=51)
+
+    def image_tmb(self):
+        if self.upload:
+            return mark_safe(
+                f'<img src="{self.get_img.url}">'
+            )
+        return 'Нет изображения'
+
+    image_tmb.short_description = 'превью'
+    image_tmb.allow_tags = True
 
     class Meta:
         verbose_name = 'Товар'

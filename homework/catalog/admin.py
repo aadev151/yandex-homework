@@ -13,7 +13,7 @@ class CategoryAdmin(admin.ModelAdmin):
 
 
 class ItemAdmin(admin.ModelAdmin):
-    list_display = ('name', 'is_published')
+    list_display = ('name', 'is_published', 'image_tmb',)
     list_display_links = ('name',)
     list_editable = ('is_published',)
     filter_horizontal = ('tags',)
