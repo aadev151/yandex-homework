@@ -1,0 +1,47 @@
+[
+{
+    "model": "catalog.image",
+    "pk": 1,
+    "fields": {
+        "name": "Nike Supreme White",
+        "upload": "uploads/2022/11/Nike-Air-Force-1-Low-Supreme-Box-Logo-White-Product.jpg_nVKsqY7.webp",
+        "item": 4
+    }
+},
+{
+    "model": "catalog.image",
+    "pk": 2,
+    "fields": {
+        "name": "Nike Supreme Black",
+        "upload": "uploads/2022/11/Nike-Air-Force-1-Low-Supreme-Box-Logo-Black-Product.jpg.webp",
+        "item": 5
+    }
+},
+{
+    "model": "catalog.image",
+    "pk": 3,
+    "fields": {
+        "name": "Nike Strawberry Cough",
+        "upload": "uploads/2022/11/Nike-SB-Dunk-High-Strawberry-Cough-Product.jpg.webp",
+        "item": 2
+    }
+},
+{
+    "model": "catalog.image",
+    "pk": 4,
+    "fields": {
+        "name": "Adidas Towelie",
+        "upload": "uploads/2022/11/adidas-Campus-80s-South-Park-Towelie-Product.jpg.webp",
+        "item": 1
+    }
+},
+{
+    "model": "catalog.image",
+    "pk": 5,
+    "fields": {
+        "name": "Adidas Pride",
+        "upload": "uploads/2022/11/IN-GX6395-1.jpg",
+        "item": 3
+    }
+}
+]

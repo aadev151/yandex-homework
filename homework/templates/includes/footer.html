@@ -1,4 +1,11 @@
-<footer>
-    <p>Подвал</p>
-    <p><a href="{% url 'catalog:catalog-item' 1 %}">Home</a></p>
+<footer class="footer mt-auto py-3 bg-light">
+    <div class="container">
+        <span class="text-muted">
+            &copy; 2022. Kitty Sneakers. Все права защищены.
+        </span>
+        <br>
+        <span class="text-muted">
+            <a href="{% url 'homepage:home' %}">Home</a>
+        </span>
+    </div>
 </footer>

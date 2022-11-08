@@ -1,0 +1,42 @@
+:root {
+    --main-color: rgb(245, 154, 9);
+    --main-color-hover: rgb(255, 170, 34);
+}
+
+.homepage-main-content{
+    padding-top: 110px;
+}
+
+.form-control:focus {
+    border-color: var(--main-color);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px var(--main-color);
+}
+
+.link-main {
+    transition: .3s;
+}
+.link-main:hover {
+    color: var(--main-color);
+}
+
+.btn-main-color {
+    --bs-btn-color: var(--bs-white);
+    --bs-btn-bg: var(--main-color);
+    --bs-btn-border-color: var(--main-color);
+    --bs-btn-border-radius: .5rem;
+    --bs-btn-hover-color: var(--bs-white);
+    --bs-btn-hover-bg: var(--main-color-hover);
+    --bs-btn-hover-border-color: var(--main-color-hover);
+    transition: .3s;
+}
+
+.btn-main-color-outlined {
+    --bs-btn-color: var(--main-color);
+    --bs-btn-bg: var(--bs-white);
+    --bs-btn-border-color: var(--main-color);
+    --bs-btn-border-radius: .5rem;
+    --bs-btn-hover-color: var(--bs-white);
+    --bs-btn-hover-bg: var(--main-color);
+    --bs-btn-hover-border-color: var(--main-color);
+    transition: .3s;
+}

@@ -1,0 +1,44 @@
+{% load static %}
+
+<header class="p-3">
+    <div class="container">
+        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+        <a href="{% url 'homepage:home' %}" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+            <img src="{% static 'img/logo.png' %}" alt="Kitty Sneakers Logo" width="40">
+        </a>
+
+        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+            <li><a class="nav-link px-2 link-secondary">&nbsp;&nbsp;&nbsp;</a></li>
+
+        {% with request.resolver_match.view_name as view_name %}
+            {% if view_name == 'homepage:home' %}
+            <li><a href="{% url 'homepage:home' %}" class="nav-link px-2 link-secondary">Home</a></li>
+            {% else %}
+            <li><a href="{% url 'homepage:home' %}" class="nav-link px-2 link-dark link-main">Home</a></li>
+            {% endif %}
+
+            {% if view_name == 'about:home' %}
+            <li><a href="{% url 'about:home' %}" class="nav-link px-2 link-secondary">О нас</a></li>
+            {% else %}
+            <li><a href="{% url 'about:home' %}" class="nav-link px-2 link-dark link-main">О нас</a></li>
+            {% endif %}
+
+            {% if view_name == 'catalog:home' or view_name == 'catalog:item' %}
+            <li><a href="{% url 'catalog:home' %}" class="nav-link px-2 link-secondary">Каталог</a></li>
+            {% else %}
+            <li><a href="{% url 'catalog:home' %}" class="nav-link px-2 link-dark link-main">Каталог</a></li>
+            {% endif %}
+        {% endwith %}
+        </ul>
+
+        <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
+            <input type="search" class="form-control" placeholder="Поиск по сайту..." aria-label="Search">
+        </form>
+
+        <div class="text-end">
+            <button type="button" class="btn btn-main-color-outlined">Войти</button>
+            <button type="button" class="btn btn-main-color">Зарегистрироваться</button>
+        </div>
+        </div>
+    </div>
+</header>
