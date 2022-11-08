@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.safestring import mark_safe
+from tinymce.models import HTMLField
 
 from Core.models import (CommonDataAbstractModel,
                          SlugAbstractModel, ImageAbstractModel)
@@ -35,13 +36,13 @@ class Category(CommonDataAbstractModel, SlugAbstractModel):
 
 
 class Item(CommonDataAbstractModel):
-    text = models.TextField(
+    text = HTMLField(
         validators=[
             validate_must_be_param('превосходно', 'роскошно')
         ],
         help_text=('Информация о товаре. '
                    'Должна содержать слова "превосходно" или "роскошно"'),
-        verbose_name='Описание товара'
+        verbose_name='Описание товара',
     )
 
     category = models.ForeignKey(
