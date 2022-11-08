@@ -73,10 +73,6 @@ class ModelsTest(TestCase):
             slug='test-tag-slug'
         )
 
-    def tearDown(self):
-        Item.objects.delete()  # TODO
-        super().tearDown()
-
     # Testing Item model
     def test_unable_create_item(self):
         item_count = Item.objects.count()
