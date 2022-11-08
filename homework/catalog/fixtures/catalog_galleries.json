@@ -1,0 +1,83 @@
+[
+{
+    "model": "catalog.gallery",
+    "pk": 1,
+    "fields": {
+        "name": "Nike Supreme 1",
+        "upload": "uploads/2022/11/nike-air-force-1-x-supreme-scarpe-calzatura-scarpa-sneakers-221_2000x_pXqy9gZ.jpg",
+        "item": 4
+    }
+},
+{
+    "model": "catalog.gallery",
+    "pk": 2,
+    "fields": {
+        "name": "Nike Supreme 2",
+        "upload": "uploads/2022/11/nike-air-force-1-supreme-duyetfashion2-1.jpg_iu5jTOz.webp",
+        "item": 4
+    }
+},
+{
+    "model": "catalog.gallery",
+    "pk": 3,
+    "fields": {
+        "name": "Nike Supreme Black 1",
+        "upload": "uploads/2022/11/supreme-nike-air-force-1-low-fw22.jpg.webp",
+        "item": 5
+    }
+},
+{
+    "model": "catalog.gallery",
+    "pk": 4,
+    "fields": {
+        "name": "Nike Strawberry Cough 1",
+        "upload": "uploads/2022/11/Nike-SB-Dunk-High-Strawberry-Cough-Special-Box.jpg.webp",
+        "item": 2
+    }
+},
+{
+    "model": "catalog.gallery",
+    "pk": 5,
+    "fields": {
+        "name": "Nike Strawberry Cough 2",
+        "upload": "uploads/2022/11/nike-sb-dunk-high-strawberry-cough-CW7093-600.jpg.webp",
+        "item": 2
+    }
+},
+{
+    "model": "catalog.gallery",
+    "pk": 6,
+    "fields": {
+        "name": "Adidas Towelie 1",
+        "upload": "uploads/2022/11/south-park-adidas-campus-80s-towelie-gz9177-release-date-info.jpeg",
+        "item": 1
+    }
+},
+{
+    "model": "catalog.gallery",
+    "pk": 7,
+    "fields": {
+        "name": "Adidas Towelie 2",
+        "upload": "uploads/2022/11/south-park-adidas-campus-80-towelie-release-date-price-06.jpg.webp",
+        "item": 1
+    }
+},
+{
+    "model": "catalog.gallery",
+    "pk": 8,
+    "fields": {
+        "name": "Adidas Pride 1",
+        "upload": "uploads/2022/11/Adidas-Superstar-Pride-2022-GX6395-3.jpg",
+        "item": 3
+    }
+},
+{
+    "model": "catalog.gallery",
+    "pk": 9,
+    "fields": {
+        "name": "Adidas Pride 2",
+        "upload": "uploads/2022/11/GX6395.jpg",
+        "item": 3
+    }
+}
+]

@@ -1,6 +1,8 @@
 from pathlib import Path
 
 from decouple import config
+from django_cleanup.signals import cleanup_pre_delete
+from sorl.thumbnail import delete
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -27,6 +29,8 @@ INSTALLED_APPS = [
     'about.apps.AboutConfig',
     'catalog.apps.CatalogConfig',
     'homepage.apps.HomepageConfig',
+    'sorl.thumbnail',
+    'django_cleanup.apps.CleanupConfig',
 ]
 
 MIDDLEWARE = [
@@ -44,7 +48,9 @@ ROOT_URLCONF = 'homework.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            BASE_DIR / 'templates'
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -105,5 +111,19 @@ USE_TZ = True
 
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    BASE_DIR / 'static_dev'
+]
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_URL = '/media/'
+
+
+def sorl_delete(**kwargs):
+    delete(kwargs['file'])
+
+
+cleanup_pre_delete.connect(sorl_delete)
