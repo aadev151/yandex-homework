@@ -23,7 +23,7 @@
             <li><a href="{% url 'about:home' %}" class="nav-link px-2 link-dark link-main">О нас</a></li>
             {% endif %}
 
-            {% if view_name == 'catalog:home' or view_name == 'catalog:item' %}
+            {% if view_name == 'catalog:home' or view_name == 'catalog:item' or view_name == 'catalog:item_gallery' %}
             <li><a href="{% url 'catalog:home' %}" class="nav-link px-2 link-secondary">Каталог</a></li>
             {% else %}
             <li><a href="{% url 'catalog:home' %}" class="nav-link px-2 link-dark link-main">Каталог</a></li>

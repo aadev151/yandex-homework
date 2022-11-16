@@ -15,9 +15,9 @@ class CategoryAdmin(admin.ModelAdmin):
 
 @admin.register(Item)
 class ItemAdmin(admin.ModelAdmin):
-    list_display = ('name', 'is_published', 'image_tmb',)
+    list_display = ('name', 'is_published', 'image_tmb', 'is_on_main')
     list_display_links = ('name',)
-    list_editable = ('is_published',)
+    list_editable = ('is_published', 'is_on_main',)
     filter_horizontal = ('tags',)
 
 
