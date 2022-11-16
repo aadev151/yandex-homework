@@ -1,23 +1,51 @@
 from django.core.exceptions import ValidationError
 from django.test import TestCase, Client
+from django.urls import reverse
 
 from .models import Category, Item, Tag
 
 
 class StaticURLTests(TestCase):
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        category = Category.objects.create(
+            is_published=True,
+            name='Тестовая категория',
+            slug='test-category-slug',
+            weight=150
+        )
+        tag = Tag.objects.create(
+            is_published=True,
+            name='Тестовый тег',
+            slug='test-tag-slug'
+        )
+
+        cls.item = Item.objects.create(
+            name='Тест 1',
+            text='роскошно',
+            category=category
+        )
+        cls.item.tags.add(tag)
+
     def test_catalog_main_page_endpoint(self):
         response = Client().get('/catalog')
         self.assertEqual(response.status_code, 301)
 
-        response = Client().get('/catalog/')
+        response = Client().get(reverse('catalog:home'))
         self.assertEqual(response.status_code, 200)
 
     def test_catalog_items_endpoint(self):
         tests = (
             {
-                'primary_key': 123,
+                'primary_key': 1,
                 'necessary_status': 200,
                 'description': 'Testing positive int'
+            },
+            {
+                'primary_key': 2,
+                'necessary_status': 404,
+                'description': 'Testing non-existing item'
             },
             {
                 'primary_key': 15.73,
@@ -160,3 +188,85 @@ class ModelsTest(TestCase):
         category.save()
 
         self.assertEqual(Category.objects.count(), categories_count + 1)
+
+
+class PageContextTests(TestCase):
+
+    # Setting up test items
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+
+        category = Category.objects.create(
+            is_published=True,
+            name='Тестовая категория',
+            slug='test-category-slug',
+            weight=150
+        )
+        tag = Tag.objects.create(
+            is_published=True,
+            name='Тестовый тег',
+            slug='test-tag-slug'
+        )
+
+        cls.item1 = Item.objects.create(
+            name='Тест 1',
+            text='роскошно',
+            category=category
+        )
+        cls.item1.tags.add(tag)
+        cls.item2 = Item.objects.create(
+            name='Тест 2',
+            text='роскошно',
+            category=category,
+        )
+        cls.item2.tags.add(tag)
+        cls.item3 = Item.objects.create(
+            name='Тест 3',
+            text='роскошно',
+            category=category,
+            is_published=False
+        )
+        cls.item3.tags.add(tag)
+
+    def test_catalog_homepage_context(self):
+        response = Client().get(reverse('catalog:home'))
+        self.assertIn('items', response.context)
+
+    def test_catalog_homepage_context_length(self):
+        tests = [
+            {
+                'description': 'All are published',
+                'published': (True, True, True),
+                'necessary_length': 3
+            },
+            {
+                'description': 'Two are published',
+                'published': (True, False, True),
+                'necessary_length': 2
+            },
+            {
+                'description': 'None are published',
+                'published': (False, False, False),
+                'necessary_length': 0
+            },
+        ]
+
+        for test in tests:
+            with self.subTest(test['description']):
+                self.item1.is_published = test['published'][0]
+                self.item1.save()
+                self.item2.is_published = test['published'][1]
+                self.item2.save()
+                self.item3.is_published = test['published'][2]
+                self.item3.save()
+
+                response = Client().get(reverse('catalog:home'))
+                self.assertEquals(
+                    len(response.context['items']),
+                    test['necessary_length']
+                )
+
+    def test_catalog_item_context(self):
+        response = Client().get(reverse('catalog:item', kwargs={'pk': 1}))
+        self.assertIn('item', response.context)

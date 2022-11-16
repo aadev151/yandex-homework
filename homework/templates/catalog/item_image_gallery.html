@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<img src="{{ item.main_image.upload.url }}" width="70%">
+{% for image in item.gallery.all %}
+    <img src="{{ image.upload.url }}" width="70%">
+    <br><br>
+{% endfor %}
+
+<p>
+    <a href="{% url 'catalog:item' item.id %}">Обратно к товару</a>
+</p>
+
+{% endblock %}

@@ -35,7 +35,33 @@ class Category(CommonDataAbstractModel, SlugAbstractModel):
         return self.name
 
 
+class ItemManager(models.Manager):
+    def published(self):
+        return (
+            self.get_queryset()
+                .filter(is_published=True)
+                .select_related('category')
+                .select_related('main_image')
+                .prefetch_related(
+                    models.Prefetch(
+                        'tags',
+                        queryset=Tag.objects.filter(is_published=True)
+                    ))
+        )
+
+    def images(self, pk):
+        return (
+            self.get_queryset()
+                .select_related('main_image')
+                .prefetch_related('gallery')
+                .filter(id=pk)
+                .first()
+        )
+
+
 class Item(CommonDataAbstractModel):
+    objects = ItemManager()
+
     text = HTMLField(
         validators=[
             validate_must_be_param('превосходно', 'роскошно')
@@ -57,6 +83,15 @@ class Item(CommonDataAbstractModel):
         verbose_name='Теги'
     )
 
+    is_on_main = models.BooleanField(
+        default=False,
+        help_text=(
+            'Показывает, отображается ли товар на главной странице. '
+            'По умолчанию НЕТ.'
+        ),
+        verbose_name='Отображается на главной странице?'
+    )
+
     class Meta:
         verbose_name = 'товар'
         verbose_name_plural = 'товары'
@@ -73,6 +108,13 @@ class Item(CommonDataAbstractModel):
 
     image_tmb.short_description = 'превью'
     image_tmb.allow_tags = True
+
+    @property
+    def get_short_description(self):
+        splitted_description = self.text.split()
+        return ((' '.join(splitted_description[:10])
+                + '...') if len(splitted_description) > 10
+                else ' '.join(splitted_description))
 
 
 class Image(ImageAbstractModel):
