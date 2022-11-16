@@ -17,7 +17,7 @@
 
     <h1>{{ item.name }}</h1>
     <p>
-        {{ item.text }}
+        {{ item.text|safe }}
     </p>
     <p class="text-muted">Категория: {{ item.category.name }}</p>
     <p class="text-muted">
