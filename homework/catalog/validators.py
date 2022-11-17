@@ -1,4 +1,5 @@
 from functools import wraps
+import re
 from string import punctuation
 
 from django.core.exceptions import ValidationError
@@ -17,9 +18,14 @@ def validate_must_be_param(*necessary_words):
 
     @wraps(validate_must_be_param)
     def validate_params(value):
+        regex_no_tags = re.compile('<.*?>')
+        value_without_tags = re.sub(regex_no_tags, '', value)
+
         set_value = set(
-            value.translate(str.maketrans('', '', punctuation)).lower().split()
+            value_without_tags
+            .translate(str.maketrans('', '', punctuation)).lower().split(),
         )
+
         if not set_value.intersection(necessary_words):
             raise ValidationError(
                 'Нужно использовать хотя бы одно из этих слов: '

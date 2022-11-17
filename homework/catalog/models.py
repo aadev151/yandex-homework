@@ -40,6 +40,7 @@ class ItemManager(models.Manager):
         return (
             self.get_queryset()
                 .filter(is_published=True)
+                .order_by('name')
                 .select_related('category')
                 .select_related('main_image')
                 .prefetch_related(
