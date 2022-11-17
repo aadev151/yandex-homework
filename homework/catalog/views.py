@@ -6,8 +6,7 @@ from .models import Item
 def item_list(request):
     context = {
         'items': (
-            Item.objects.published()
-            .order_by('category__name')
+            Item.objects.published_sorted_by_category()
         ),
     }
     return render(request, 'catalog/index.html', context=context)

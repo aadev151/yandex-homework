@@ -40,6 +40,7 @@ class ItemManager(models.Manager):
         return (
             self.get_queryset()
                 .filter(is_published=True)
+                .order_by('name')
                 .select_related('category')
                 .select_related('main_image')
                 .prefetch_related(
@@ -48,6 +49,9 @@ class ItemManager(models.Manager):
                         queryset=Tag.objects.filter(is_published=True)
                     ))
         )
+
+    def published_sorted_by_category(self):
+        return self.published().order_by('category__name', 'name')
 
     def images(self, pk):
         return (
