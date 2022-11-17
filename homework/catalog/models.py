@@ -50,6 +50,9 @@ class ItemManager(models.Manager):
                     ))
         )
 
+    def published_sorted_by_category(self):
+        return self.published().order_by('category__name', 'name')
+
     def images(self, pk):
         return (
             self.get_queryset()
