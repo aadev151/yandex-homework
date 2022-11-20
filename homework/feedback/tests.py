@@ -16,7 +16,9 @@ class FeedbackFormTests(TestCase):
         self.assertEquals(text_field.label, 'Текст отзыва')       
         self.assertEquals(text_field.help_text, 'Оставьте здесь свой отзыв')
 
-    def test_redirect_after_filling_form(self):
+    def test_redirect_and_creating_database_record_after_submitting_form(self):
+        feedback_count = Feedback.objects.count()
+
         form_data = {
             'text': 'Тестовый отзыв',
         }
@@ -25,4 +27,6 @@ class FeedbackFormTests(TestCase):
             data=form_data,
             follows=True
         )
+
         self.assertRedirects(response, reverse('feedback:feedback'))
+        self.assertEquals(Feedback.objects.count(), feedback_count + 1)
