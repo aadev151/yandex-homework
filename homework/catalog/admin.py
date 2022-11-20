@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Category, Gallery, Image, Item, Tag
+from catalog.models import Category, Gallery, Image, Item, Tag
 
 
 admin.site.site_header = ('Kitty Sneakers Admin')

@@ -11,9 +11,10 @@
     </p>
 
     <img src="{{ item.main_image.upload.url }}" alt="{{ item.name }}" width="80%">
-    <p>
-        <a href="{% url 'catalog:item_gallery' item.id %}">Галлерея<a>
-    </p>
+    {% for image in item.gallery.all %}
+        <img src="{{ image.upload.url }}" width="80%">
+        <br><br>
+    {% endfor %}
 
     <h1>{{ item.name }}</h1>
     <p>

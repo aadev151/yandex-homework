@@ -28,6 +28,12 @@
             {% else %}
             <li><a href="{% url 'catalog:home' %}" class="nav-link px-2 link-dark link-main">Каталог</a></li>
             {% endif %}
+
+            {% if view_name == 'feedback:feedback' %}
+            <li><a href="{% url 'feedback:feedback' %}" class="nav-link px-2 link-secondary">Отправить отзыв</a></li>
+            {% else %}
+            <li><a href="{% url 'feedback:feedback' %}" class="nav-link px-2 link-dark link-main">Отправить отзыв</a></li>
+            {% endif %}
         {% endwith %}
         </ul>
 

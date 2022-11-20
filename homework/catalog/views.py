@@ -1,27 +1,27 @@
-from django.shortcuts import get_object_or_404, render
+from django.http import HttpResponseNotFound
+from django.shortcuts import render
 
-from .models import Item
+from catalog.models import Item
 
 
 def item_list(request):
+    template = 'catalog/index.html'
     context = {
         'items': (
             Item.objects.published_sorted_by_category()
         ),
     }
-    return render(request, 'catalog/index.html', context=context)
+    return render(request, template, context=context)
 
 
 def item_detail(request, pk):
+    template = 'catalog/item.html'
+
+    item = Item.objects.images(pk)
+    if not item:
+        return HttpResponseNotFound("it's 404 lol :)")
     context = {
-        'item': get_object_or_404(Item, id=pk)
+        'item': item,
     }
 
-    return render(request, 'catalog/item.html', context=context)
-
-
-def item_gallery(request, pk):
-    context = {
-        'item': Item.objects.images(pk)
-    }
-    return render(request, 'catalog/item_image_gallery.html', context=context)
+    return render(request, template, context=context)

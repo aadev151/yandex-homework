@@ -25,7 +25,7 @@ def validate_must_be_param(*necessary_words):
             value_without_tags
             .translate(str.maketrans('', '', punctuation)).lower().split(),
         )
-
+        
         if not set_value.intersection(necessary_words):
             raise ValidationError(
                 'Нужно использовать хотя бы одно из этих слов: '
