@@ -30,13 +30,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'about.apps.AboutConfig',
-    'catalog.apps.CatalogConfig',
-    'homepage.apps.HomepageConfig',
     'sorl.thumbnail',
     'django_cleanup.apps.CleanupConfig',
     'tinymce',
     'debug_toolbar',
+    'about.apps.AboutConfig',
+    'catalog.apps.CatalogConfig',
+    'homepage.apps.HomepageConfig',
+    'feedback.apps.FeedbackConfig',
 ]
 
 MIDDLEWARE = [
@@ -134,3 +135,7 @@ def sorl_delete(**kwargs):
 
 
 cleanup_pre_delete.connect(sorl_delete)
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
+EMAIL_FILE_PATH = BASE_DIR / 'send_mail'

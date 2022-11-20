@@ -4,7 +4,7 @@ from tinymce.models import HTMLField
 
 from Core.models import (CommonDataAbstractModel,
                          SlugAbstractModel, ImageAbstractModel)
-from .validators import validate_must_be_param, validate_weight
+from catalog.validators import validate_must_be_param, validate_weight
 
 
 class Tag(CommonDataAbstractModel, SlugAbstractModel):
@@ -40,7 +40,6 @@ class ItemManager(models.Manager):
         return (
             self.get_queryset()
                 .filter(is_published=True)
-                .order_by('name')
                 .select_related('category')
                 .select_related('main_image')
                 .prefetch_related(
@@ -99,6 +98,7 @@ class Item(CommonDataAbstractModel):
     class Meta:
         verbose_name = 'товар'
         verbose_name_plural = 'товары'
+        ordering = ('name',)
 
     def __str__(self):
         return self.name
@@ -112,13 +112,6 @@ class Item(CommonDataAbstractModel):
 
     image_tmb.short_description = 'превью'
     image_tmb.allow_tags = True
-
-    @property
-    def get_short_description(self):
-        splitted_description = self.text.split()
-        return ((' '.join(splitted_description[:10])
-                + '...') if len(splitted_description) > 10
-                else ' '.join(splitted_description))
 
 
 class Image(ImageAbstractModel):
