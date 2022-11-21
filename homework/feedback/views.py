@@ -1,9 +1,9 @@
-from decouple import config
 from django.core.mail import send_mail
 from django.shortcuts import redirect, render
 
 from . import forms
 from feedback.models import Feedback
+from homework.settings import SENT_FROM_EMAIL, ADMIN_EMAIL
 
 
 def feedback(request):
@@ -22,10 +22,9 @@ def feedback(request):
         )
         send_mail(
             'Вы отправили отзыв',
-            f'''Вы отправили следующий отзыв:
-{feedback_text}''',
-            config('SENT_FROM_EMAIL'),
-            [config('ADMIN_EMAIL'), ]
+            f'Вы отправили следующий отзыв: {feedback_text}',
+            SENT_FROM_EMAIL,
+            [ADMIN_EMAIL, ]
         )
 
         return redirect('feedback:feedback')

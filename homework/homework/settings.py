@@ -139,3 +139,6 @@ cleanup_pre_delete.connect(sorl_delete)
 
 EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
 EMAIL_FILE_PATH = BASE_DIR / 'send_mail'
+
+SENT_FROM_EMAIL = config('SENT_FROM_EMAIL')
+ADMIN_EMAIL = config('ADMIN_EMAIL')
