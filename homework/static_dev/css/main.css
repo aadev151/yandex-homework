@@ -40,3 +40,12 @@
     --bs-btn-hover-border-color: var(--main-color);
     transition: .3s;
 }
+
+
+.errorlist {
+    color: red;
+}
+
+.readonly, .readonly:focus, .readonly:active {
+    color: #aaa;
+}

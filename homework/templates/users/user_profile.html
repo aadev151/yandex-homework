@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+    <h1>Hello, {{ user.username }}!</h1>
+
+    <button class="btn btn-main-color" onclick="window.location.href=`{% url 'users:password_change' %}`">Сменить пароль</button>
+    <button class="btn btn-main-color-outlined" onclick="window.location.href=`{% url 'users:logout' %}`">Выйти из аккаунта</button>
+    
+    <br>
+    <hr>
+
+    <h3>Редактировать профиль:</h3>
+
+    <label>Имя пользователя:</label>
+    <input class="form-control" disabled value="{{ user.username }}">
+    <br>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ user_form.as_p }}
+        {{ birthday_form.as_p }}
+        <input class="btn btn-main-color" type="submit" value="Обновить">
+    </form>
+    <hr>
+
+{% endblock %}

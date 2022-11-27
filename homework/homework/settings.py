@@ -23,6 +23,10 @@ INTERNAL_IPS = [
 ]
 
 
+LOGIN_URL = '/login/'
+LOGIN_REDIRECT_URL = '/'
+
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -38,6 +42,7 @@ INSTALLED_APPS = [
     'catalog.apps.CatalogConfig',
     'homepage.apps.HomepageConfig',
     'feedback.apps.FeedbackConfig',
+    'users.apps.UsersConfig',
 ]
 
 MIDDLEWARE = [
