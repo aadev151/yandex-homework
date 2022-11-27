@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<h1>Войти в аккаунт</h1>
+
+{% include 'includes/auth_form.html' %}
+
+<br>
+<p>
+    Забыли пароль? Вы можете сбросить его <a href="{% url 'users:password_reset' %}">здесь</a>.
+</p>
+
+{% endblock %}

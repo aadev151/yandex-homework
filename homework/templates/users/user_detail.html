@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+    <p>
+        <a href="{% url 'users:user_list' %}">Пользователи</a>
+        /
+        @{{ user_.username }}
+    </p>
+
+    <h1>Пользователь @{{ user_.username }}</h1>
+    <h4>Имя: {{ user_.first_name|default:"Не заполнено" }}</h4>
+    <h4>Фамилия: {{ user_.last_name|default:"Не заполнено" }}</h4>
+    <h4>Почта: {{ user_.email|default:"Не заполнено" }}</h4>
+    <h4>День рождения: {{ user_.profile.birthday|default:"Не заполнено" }}</h4>
+
+{% endblock %}
