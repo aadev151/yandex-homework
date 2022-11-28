@@ -1,23 +1,26 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
+
+from users.managers import EmailUserManager
 
 
-class Profile(models.Model):
-    user = models.OneToOneField(
-        User,
-        on_delete=models.CASCADE,
-        verbose_name='Пользователь',
+class User(AbstractUser):
+    username = None
+    email = models.EmailField(
+        verbose_name='Электронная почта',
+        unique=True
     )
-
     birthday = models.DateField(
-        help_text='День рождения пользователя',
         verbose_name='День рождения',
+        blank=True,
         null=True
     )
 
-    class Meta:
-        verbose_name = 'День рождения'
-        verbose_name_plural = 'Дни рождения'
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ['password']
 
-    def __str__(self):
-        return f'День рождения для пользователя {self.user.username}'
+    objects = EmailUserManager()
+
+    class Meta:
+        verbose_name = 'Пользователь'
+        verbose_name_plural = 'Пользователи'

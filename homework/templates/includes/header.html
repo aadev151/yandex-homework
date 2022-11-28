@@ -46,7 +46,7 @@
             <button type="button" class="btn btn-main-color-outlined" onclick="window.location.href = `{% url 'users:login' %}`">Войти</button>
             <button type="button" class="btn btn-main-color" onclick="window.location.href = `{% url 'users:signup' %}`">Зарегистрироваться</button>
             {% else %}
-            <p>Привет, <a href="{% url 'users:profile' %}">{{ user.username }}</a>!</p>
+            <p>Привет, <a href="{% url 'users:profile' %}">{{ user.email }}</a>!</p>
             {% endif %}
         </div>
     </div>

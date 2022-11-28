@@ -1,20 +1,38 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
-from django.contrib.auth.models import User
+from django.contrib.auth.models import Group
 
-from .models import Profile
-
-
-class ProfileInlined(admin.StackedInline):
-    model = Profile
-    max_num = 1
-    min_num = 1
-    can_delete = False
+from users.forms import EmailUserChangeForm, EmailUserCreationForm
+from users.models import User
 
 
 class UserAdmin(BaseUserAdmin):
-    inlines = (ProfileInlined, )
+    add_form = EmailUserCreationForm
+    form = EmailUserChangeForm
+    model = User
+    ordering = ('email',)
+    list_display = ('email', 'is_staff', 'is_active', 'birthday',)
+
+    fieldsets = (
+        (None, {'fields': ('email', 'password')}),
+        ('Статус', {'fields': ('is_staff', 'is_active')}),
+    )
+    add_fieldsets = (
+        (
+            None,
+            {
+                'classes': ('wide',),
+                'fields': (
+                    'email',
+                    'password1',
+                    'password2',
+                    'is_staff',
+                    'is_active'
+                )
+            }
+        ),
+    )
 
 
-admin.site.unregister(User)
 admin.site.register(User, UserAdmin)
+admin.site.unregister(Group)
