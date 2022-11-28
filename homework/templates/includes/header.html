@@ -34,6 +34,12 @@
             {% else %}
             <li><a href="{% url 'feedback:feedback' %}" class="nav-link px-2 link-dark link-main">Отправить отзыв</a></li>
             {% endif %}
+
+            {% if view_name == 'users:user_list' or view_name == 'users:user_detail'%}
+            <li><a href="{% url 'users:user_list' %}" class="nav-link px-2 link-secondary">Пользователи</a></li>
+            {% else %}
+            <li><a href="{% url 'users:user_list' %}" class="nav-link px-2 link-dark link-main">Пользователи</a></li>
+            {% endif %}
         {% endwith %}
         </ul>
 
@@ -46,7 +52,8 @@
             <button type="button" class="btn btn-main-color-outlined" onclick="window.location.href = `{% url 'users:login' %}`">Войти</button>
             <button type="button" class="btn btn-main-color" onclick="window.location.href = `{% url 'users:signup' %}`">Зарегистрироваться</button>
             {% else %}
-            <p>Привет, <a href="{% url 'users:profile' %}">{{ user.username }}</a>!</p>
+            <button type="button" class="btn btn-main-color" onclick="window.location.href = `{% url 'users:profile' %}`">Профиль</button>
+            <button type="button" class="btn btn-main-color-outlined" onclick="window.location.href = `{% url 'users:logout' %}`">Выйти</button>
             {% endif %}
         </div>
     </div>

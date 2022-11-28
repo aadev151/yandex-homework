@@ -1,5 +1,8 @@
-from django.db import models
+from datetime import date
+
 from django.contrib.auth.models import User
+from django.core.validators import MaxValueValidator
+from django.db import models
 
 
 class Profile(models.Model):
@@ -12,7 +15,9 @@ class Profile(models.Model):
     birthday = models.DateField(
         help_text='День рождения пользователя',
         verbose_name='День рождения',
-        null=True
+        null=True,
+        blank=True,
+        validators=[MaxValueValidator(limit_value=date.today)]
     )
 
     class Meta:

@@ -1,6 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from django.utils.dateformat import DateFormat
 
@@ -33,7 +33,7 @@ def signup(request):
 def user_list(request):
     template = 'users/user_list.html'
     context = {
-        'users': User.objects.filter(is_active=True),
+        'users': User.objects.all(),
     }
 
     return render(request, template, context)
@@ -41,8 +41,9 @@ def user_list(request):
 
 def user_detail(request, id):
     template = 'users/user_detail.html'
+    user = get_object_or_404(User, id=id)
     context = {
-        'user_': User.objects.get(id=id),
+        'user_': user,
     }
 
     return render(request, template, context)
