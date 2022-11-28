@@ -1,5 +1,8 @@
-from django.db import models
+from datetime import date
+
 from django.contrib.auth.models import AbstractUser
+from django.core.validators import MaxValueValidator
+from django.db import models
 
 from users.managers import EmailUserManager
 
@@ -13,7 +16,8 @@ class User(AbstractUser):
     birthday = models.DateField(
         verbose_name='День рождения',
         blank=True,
-        null=True
+        null=True,
+        validators=[MaxValueValidator(limit_value=date.today)]
     )
 
     USERNAME_FIELD = 'email'
