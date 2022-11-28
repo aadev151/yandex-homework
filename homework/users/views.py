@@ -5,7 +5,6 @@ from django.urls import reverse
 from django.utils.dateformat import DateFormat
 
 from users.forms import UpdateProfileForm, UpdateUserForm, SignupForm
-from users.models import Profile
 
 
 def signup(request):
@@ -16,11 +15,10 @@ def signup(request):
     form = SignupForm(request.POST or None)
 
     if request.method == 'POST' and form.is_valid():
-        user = User.objects.create_user(
+        User.objects.create_user(
             username=form.cleaned_data.get('username'),
             password=form.cleaned_data.get('password')
         )
-        Profile.objects.create(user=user)
         return redirect(reverse('users:profile'))
 
     context = {
