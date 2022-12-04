@@ -1,11 +1,23 @@
 from django.contrib.auth.forms import (
     AuthenticationForm, PasswordChangeForm,
     PasswordResetForm, SetPasswordForm)
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django import forms
 
 from Core.auth_forms import AuthForm
-from users.admin import User
-from users.models import Profile
+from users.models import User
+
+
+class EmailUserCreationForm(UserCreationForm):
+    class Meta:
+        model = User
+        fields = ('email',)
+
+
+class EmailUserChangeForm(UserChangeForm):
+    class Meta:
+        model = User
+        fields = ('email',)
 
 
 class SignupForm(forms.ModelForm, AuthForm):
@@ -16,7 +28,7 @@ class SignupForm(forms.ModelForm, AuthForm):
 
     class Meta:
         model = User
-        fields = ('username', 'password')
+        fields = ('email', 'password')
         widgets = ({
             'password': forms.PasswordInput()
         })
@@ -31,16 +43,19 @@ class SignupForm(forms.ModelForm, AuthForm):
 class UpdateUserForm(forms.ModelForm, AuthForm):
     class Meta:
         model = User
-        fields = ('email', 'first_name', 'last_name')
-
-
-class UpdateProfileForm(forms.ModelForm, AuthForm):
-    class Meta:
-        model = Profile
-        fields = ('birthday',)
+        fields = ('email', 'first_name', 'last_name', 'birthday')
         widgets = ({
             'birthday': forms.DateInput(attrs={'type': 'date'})
         })
+
+
+# class UpdateProfileForm(forms.ModelForm, AuthForm):
+#     class Meta:
+#         model = Profile
+#         fields = ('birthday',)
+#         widgets = ({
+#             'birthday': forms.DateInput(attrs={'type': 'date'})
+#         })
 
 
 class BootstrapLoginForm(AuthenticationForm, AuthForm):
