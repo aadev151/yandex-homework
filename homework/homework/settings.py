@@ -147,3 +147,6 @@ EMAIL_FILE_PATH = BASE_DIR / 'send_mail'
 
 SENT_FROM_EMAIL = config('SENT_FROM_EMAIL')
 ADMIN_EMAIL = config('ADMIN_EMAIL')
+
+
+AUTH_USER_MODEL = 'users.User'

@@ -71,7 +71,7 @@ class Item(CommonDataAbstractModel):
         ],
         help_text=('Информация о товаре. '
                    'Должна содержать слова "превосходно" или "роскошно"'),
-        verbose_name='Описание товара'
+        verbose_name='Описание товара',
     )
 
     category = models.ForeignKey(
