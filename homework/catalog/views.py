@@ -24,9 +24,12 @@ def item_detail(request, pk):
     if not item:
         return HttpResponseNotFound("it's 404 lol :)")
 
-    initial_data = {
-        'score': Rating.objects.get(user_id=request.user.id).score,
-    }
+    initial_data = {}
+    try:
+        initial_data['score'] = Rating.objects.get(
+            user_id=request.user.id).score
+    except Rating.DoesNotExist:
+        initial_data['score'] = None
 
     rating_form = RatingForm(
         request.POST or None,
@@ -44,9 +47,12 @@ def item_detail(request, pk):
 
         return redirect(reverse('users:profile'))
 
-    rating_queryset = Rating.objects.filter(item=item, score__isnull=False)
-    all_ratings = list(map(lambda rating: rating.score, rating_queryset))
-    average = sum(all_ratings) / len(all_ratings)
+    try:
+        rating_queryset = Rating.objects.filter(item=item, score__isnull=False)
+        all_ratings = list(map(lambda rating: rating.score, rating_queryset))
+        average = sum(all_ratings) / len(all_ratings)
+    except ZeroDivisionError:
+        average = float(0)
 
     context = {
         'item': item,
