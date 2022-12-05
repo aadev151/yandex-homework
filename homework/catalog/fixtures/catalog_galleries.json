@@ -4,7 +4,7 @@
     "pk": 1,
     "fields": {
         "name": "Nike Supreme 1",
-        "upload": "uploads/2022/11/nike-air-force-1-x-supreme-scarpe-calzatura-scarpa-sneakers-221_2000x_pXqy9gZ.jpg",
+        "upload": "fixtures/gallery/nike-air-force-1-x-supreme-scarpe-calzatura-scarpa-sneakers-221_2000x.jpg",
         "item": 4
     }
 },
@@ -13,7 +13,7 @@
     "pk": 2,
     "fields": {
         "name": "Nike Supreme 2",
-        "upload": "uploads/2022/11/nike-air-force-1-supreme-duyetfashion2-1.jpg_iu5jTOz.webp",
+        "upload": "fixtures/gallery/nike-air-force-1-supreme-duyetfashion2-1.jpg.webp",
         "item": 4
     }
 },
@@ -22,7 +22,7 @@
     "pk": 3,
     "fields": {
         "name": "Nike Supreme Black 1",
-        "upload": "uploads/2022/11/supreme-nike-air-force-1-low-fw22.jpg.webp",
+        "upload": "fixtures/gallery/20200302-Supreme-02.jpg.webp",
         "item": 5
     }
 },
@@ -31,7 +31,7 @@
     "pk": 4,
     "fields": {
         "name": "Nike Strawberry Cough 1",
-        "upload": "uploads/2022/11/Nike-SB-Dunk-High-Strawberry-Cough-Special-Box.jpg.webp",
+        "upload": "fixtures/gallery/Nike-SB-Dunk-High-Strawberry-Cough-Special-Box.jpg.webp",
         "item": 2
     }
 },
@@ -40,7 +40,7 @@
     "pk": 5,
     "fields": {
         "name": "Nike Strawberry Cough 2",
-        "upload": "uploads/2022/11/nike-sb-dunk-high-strawberry-cough-CW7093-600.jpg.webp",
+        "upload": "fixtures/gallery/nike-sb-dunk-high-strawberry-cough-CW7093-600.jpg.webp",
         "item": 2
     }
 },
@@ -49,7 +49,7 @@
     "pk": 6,
     "fields": {
         "name": "Adidas Towelie 1",
-        "upload": "uploads/2022/11/south-park-adidas-campus-80s-towelie-gz9177-release-date-info.jpeg",
+        "upload": "fixtures/gallery/south-park-adidas-campus-80-towelie-release-date-price-01.jpg.webp",
         "item": 1
     }
 },
@@ -58,7 +58,7 @@
     "pk": 7,
     "fields": {
         "name": "Adidas Towelie 2",
-        "upload": "uploads/2022/11/south-park-adidas-campus-80-towelie-release-date-price-06.jpg.webp",
+        "upload": "fixtures/gallery/south-park-adidas-campus-80-towelie-release-date-price-06.jpg-2.webp",
         "item": 1
     }
 },
@@ -67,7 +67,7 @@
     "pk": 8,
     "fields": {
         "name": "Adidas Pride 1",
-        "upload": "uploads/2022/11/Adidas-Superstar-Pride-2022-GX6395-3.jpg",
+        "upload": "fixtures/gallery/Adidas-Superstar-Pride-2022-GX6395-3.jpg",
         "item": 3
     }
 },
@@ -76,7 +76,7 @@
     "pk": 9,
     "fields": {
         "name": "Adidas Pride 2",
-        "upload": "uploads/2022/11/GX6395.jpg",
+        "upload": "fixtures/gallery/GX6395.jpg",
         "item": 3
     }
 }
