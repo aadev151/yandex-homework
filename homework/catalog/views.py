@@ -47,12 +47,12 @@ def item_detail(request, pk):
 
         return redirect(reverse('users:profile'))
 
-    try:
-        rating_queryset = Rating.objects.filter(item=item, score__isnull=False)
-        all_ratings = list(map(lambda rating: rating.score, rating_queryset))
+    rating_queryset = Rating.objects.filter(item=item, score__isnull=False)
+    all_ratings = list(map(lambda rating: rating.score, rating_queryset))
+    if len(all_ratings) != 0:
         average = sum(all_ratings) / len(all_ratings)
-    except ZeroDivisionError:
-        average = float(0)
+    else:
+        average = '0.0'
 
     context = {
         'item': item,
