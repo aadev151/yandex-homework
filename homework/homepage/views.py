@@ -1,15 +1,10 @@
-from django.shortcuts import render
+from django.views.generic import ListView
 
 from catalog.models import Item
 
 
-def home(request):
-    template = 'homepage/index.html'
-    context = {
-        'items': (
-            Item.objects.published()
-            .filter(is_on_main=True)
-        ),
-    }
-
-    return render(request, template, context=context)
+class HomeView(ListView):
+    model = Item
+    context_object_name = 'items'
+    queryset = Item.objects.published().filter(is_on_main=True)
+    template_name = 'homepage/index.html'
