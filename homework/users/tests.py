@@ -1,5 +1,5 @@
 from django.test import Client, TestCase
-from datetime import date
+from datetime import date, timedelta
 from .models import User as Profile
 
 
@@ -7,11 +7,11 @@ class ModelsTest(TestCase):
     def test_birthday_show_correct_context(self):
         self.user = Profile.objects.create_user(
             first_name="test1", email="test1@gmail.com", password="1234abcd",
-            birthday="2022-07-06"
+            birthday=date.today() - timedelta(days=5)
         )
         self.user2 = Profile.objects.create_user(
             first_name="test2", email="test2@gmail.com", password="1234abcd",
-            birthday="2022-06-06"
+            birthday=date.today() - timedelta(days=1)
         )
         response = Client().get("/")
         self.assertIn(
@@ -26,7 +26,7 @@ class ModelsTest(TestCase):
         )
         self.user4 = Profile.objects.create_user(
             first_name="test2", email="test4@gmail.com", password="1234abcd",
-            birthday="2022-06-06"
+            birthday=date.today() - timedelta(days=1)
         )
         response = Client().get("/")
         self.assertEqual(len(response.context["birthday_today"]), 1)
