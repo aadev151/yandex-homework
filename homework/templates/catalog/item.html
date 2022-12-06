@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% load static %}
+
 {% block content %}
 
     <p>
@@ -28,5 +30,41 @@
             {{ tag }}&nbsp;&nbsp;
         {% endfor %}
     </p>
+
+    <hr>
+
+    <h5>Средняя оценка: {{ average }} (по данным {{ total }} пользователей)</h5>
+
+    <h6>Оставьте свою оценку</h6>
+    <form method="post">
+        {% csrf_token %}
+        {{ rating_form }}
+        <br>
+        <div id="stars"></div>
+        <br>
+        <input class="btn btn-main-color" type="submit" value="Оставить отзыв">
+    </form>
+
+    <script>
+        let ratingField = document.getElementById('{{ rating_form.score.auto_id }}')
+
+        document.getElementById('stars').innerHTML = ''
+        for (let step = 0; step < ratingField.value; step++) {
+            var img = document.createElement('img')
+            img.src = "https://static4.depositphotos.com/1001003/335/i/600/depositphotos_3350007-stock-photo-3d-star.jpg"
+            img.width = 40
+            document.getElementById('stars').appendChild(img)
+        }
+
+        ratingField.onchange = function() {
+            document.getElementById('stars').innerHTML = ''
+            for (let step = 0; step < ratingField.value; step++) {
+                var img = document.createElement('img')
+                img.src = "https://static4.depositphotos.com/1001003/335/i/600/depositphotos_3350007-stock-photo-3d-star.jpg"
+                img.width = 40
+                document.getElementById('stars').appendChild(img)
+            }
+        }
+    </script>
 
 {% endblock %}

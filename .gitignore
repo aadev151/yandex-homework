@@ -15,8 +15,9 @@ db.sqlite3
 db.sqlite3-journal
 
 # Cache and logs
-homework/media/
-homework/send_email/
+homework/media/cache/*
+homework/media/uploads/*
+homework/send_mail/
 
 # IDEs
 .vscode/
