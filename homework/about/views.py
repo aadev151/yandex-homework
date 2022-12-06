@@ -1,7 +1,5 @@
-from django.shortcuts import render
+from django.views.generic import TemplateView
 
 
-def description(request):
-    context = {}
+class Description(TemplateView):
     template_name = 'about/index.html'
-    return render(request, template_name, context)

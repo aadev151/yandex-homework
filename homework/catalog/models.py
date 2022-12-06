@@ -52,13 +52,11 @@ class ItemManager(models.Manager):
     def published_sorted_by_category(self):
         return self.published().order_by('category__name', 'name')
 
-    def images(self, pk):
+    def images(self):
         return (
             self.get_queryset()
                 .select_related('main_image')
                 .prefetch_related('gallery')
-                .filter(id=pk)
-                .first()
         )
 
 
