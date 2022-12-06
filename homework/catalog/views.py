@@ -1,27 +1,17 @@
-from django.http import HttpResponseNotFound
-from django.shortcuts import render
+from django.views.generic import ListView, DetailView
 
 from catalog.models import Item
 
 
-def item_list(request):
-    template = 'catalog/index.html'
-    context = {
-        'items': (
-            Item.objects.published_sorted_by_category()
-        ),
-    }
-    return render(request, template, context=context)
+class ItemListView(ListView):
+    model = Item
+    context_object_name = 'items'
+    queryset = Item.objects.published_sorted_by_category()
+    template_name = 'catalog/index.html'
 
 
-def item_detail(request, pk):
-    template = 'catalog/item.html'
-
-    item = Item.objects.images(pk)
-    if not item:
-        return HttpResponseNotFound("it's 404 lol :)")
-    context = {
-        'item': item,
-    }
-
-    return render(request, template, context=context)
+class ItemDetailView(DetailView):
+    model = Item
+    context_object_name = 'item'
+    queryset = Item.objects.images()
+    template_name = 'catalog/item.html'
