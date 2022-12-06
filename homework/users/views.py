@@ -1,77 +1,59 @@
-from django.contrib.auth.decorators import login_required
-from django.shortcuts import get_object_or_404, redirect, render
-from django.urls import reverse
 from django.utils.dateformat import DateFormat
+from django.views.generic import FormView, ListView, DetailView
 
 from users.forms import UpdateUserForm, SignupForm
 from users.models import User
 
 
-def signup(request):
-    if request.user.is_authenticated:
-        return redirect(reverse('users:profile'))
+class SignupView(FormView):
+    form_class = SignupForm
+    template_name = 'users/signup.html'
+    success_url = '/profile/'
 
-    template = 'users/signup.html'
-    form = SignupForm(request.POST or None)
-
-    if request.method == 'POST' and form.is_valid():
+    def form_valid(self, form):
         User.objects.create_user(
             email=form.cleaned_data.get('email'),
-            password=form.cleaned_data.get('password')
+            password=form.cleaned_data.get('password'),
         )
-        return redirect(reverse('users:profile'))
-
-    context = {
-        'form': form,
-    }
-
-    return render(request, template, context)
+        return super().form_valid(form)
 
 
-def user_list(request):
-    template = 'users/user_list.html'
-    context = {
-        'users': User.objects.all(),
-    }
-
-    return render(request, template, context)
+class UserListView(ListView):
+    model = User
+    context_object_name = 'users'
+    template_name = 'users/user_list.html'
 
 
-def user_detail(request, id):
-    template = 'users/user_detail.html'
-    user = get_object_or_404(User, id=id)
-    context = {
-        'user_': user,
-    }
-
-    return render(request, template, context)
+class UserDetailView(DetailView):
+    model = User
+    context_object_name = 'user_'
+    template_name = 'users/user_detail.html'
 
 
-@login_required
-def profile(request):
-    template = 'users/user_profile.html'
-    initial_data = {
-        'email': request.user.email,
-        'first_name': request.user.first_name,
-        'last_name': request.user.last_name,
-    }
-    if request.user.birthday:
-        initial_data['birthday'] = DateFormat(
-            request.user.birthday
-        ).format('Y-m-d')
+class ProfileView(FormView):
+    form_class = UpdateUserForm
+    template_name = 'users/user_profile.html'
+    success_url = '/profile/'
 
-    form = UpdateUserForm(
-        request.POST or None,
-        initial=initial_data,
-        instance=request.user
-    )
+    def get_initial(self):
+        initial = super().get_initial()
+        initial['email'] = self.request.user.email
+        initial['first_name'] = self.request.user.first_name
+        initial['last_name'] = self.request.user.last_name
 
-    if request.method == 'POST' and form.is_valid():
+        if self.request.user.birthday:
+            initial['birthday'] = DateFormat(
+                self.request.user.birthday
+            ).format('Y-m-d')
+
+        return initial
+
+    def get_form(self):
+        form = super().get_form()
+        form.initial = self.get_initial()
+        form.instance = self.request.user
+        return form
+
+    def form_valid(self, form):
         form.save()
-        return redirect('users:profile')
-
-    context = {
-        'form': form,
-    }
-
-    return render(request, template, context)
+        return super().form_valid(form)
