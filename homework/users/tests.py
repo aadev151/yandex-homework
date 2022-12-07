@@ -27,7 +27,7 @@ class ModelsTest(TestCase):
             response.context,
         )
 
-    def test_birthday_show_correct_context_null(self):
+    def test_birthday_show_correct_context_empty(self):
         Profile.objects.create_user(
             first_name="test1", email="test1@gmail.com", password="1234abcd",
             birthday=date.today() - timedelta(days=5)
@@ -39,7 +39,7 @@ class ModelsTest(TestCase):
         response = Client().get(reverse('homepage:home'))
         self.assertEqual(len(response.context["birthday_today"]), 0)
 
-    def test_birthday_show_correct_context_not_null(self):
+    def test_birthday_show_correct_context_not_empty(self):
         Profile.objects.create_user(
             first_name="test1", email="test1@gmail.com", password="1234abcd",
             birthday=date.today()
