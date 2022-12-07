@@ -57,4 +57,12 @@
             {% endif %}
         </div>
     </div>
+    <div class="container birthday">
+        <p>Сегодня день рождения у этих ребят:</p>
+        <ol>
+        {% for birthday in birthday_today %}
+          <li>{{ birthday.first_name }} {{ birthday.email }}</li>
+        {% endfor %}
+      </ol>
+    </div>
 </header>
