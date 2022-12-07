@@ -1,32 +1,27 @@
 from django.core.mail import send_mail
-from django.shortcuts import redirect, render
+from django.views.generic import FormView
+
 
 from . import forms
 from feedback.models import Feedback
 from homework.settings import SENT_FROM_EMAIL, ADMIN_EMAIL
 
 
-def feedback(request):
-    template = 'feedback/feedback.html'
+class FeedbackView(FormView):
+    form_class = forms.FeedbackForm
+    template_name = 'feedback/feedback.html'
+    success_url = '/feedback/'
 
-    form = forms.FeedbackForm(request.POST or None)
-    context = {
-        'form': form,
-    }
-
-    if request.method == 'POST' and form.is_valid():
+    def form_valid(self, form):
         feedback_text = form.cleaned_data['text']
 
-        Feedback.objects.create(
-            text=feedback_text
-        )
+        Feedback.objects.create(text=feedback_text)
         send_mail(
             'Вы отправили отзыв',
             f'Вы отправили следующий отзыв: {feedback_text}',
             SENT_FROM_EMAIL,
-            [ADMIN_EMAIL, ]
+            [
+                ADMIN_EMAIL,
+            ],
         )
-
-        return redirect('feedback:feedback')
-
-    return render(request, template, context=context)
+        return super().form_valid(form)
