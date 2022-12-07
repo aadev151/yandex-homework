@@ -35,10 +35,14 @@
 
     <h5>Средняя оценка: {{ average }} (по данным {{ total }} пользователей)</h5>
 
-    <h6>Оставьте свою оценку</h6>
-
     {% if request.user.is_authenticated %}
-        <form method="post">
+        {% if rating_form.score.value %}
+            <h6>Измените свою оценку или <a onclick="deleteRating()" class="link">удалите ее</a></h6>
+        {% else %}
+            <h6>Оставьте свою оценку</h6>
+        {% endif %}
+
+        <form method="post" id="ratingForm">
             {% csrf_token %}
             {{ rating_form }}
             <br>
@@ -47,6 +51,7 @@
             <input class="btn btn-main-color" type="submit" value="Оставить отзыв">
         </form>
     {% else %}
+        <h6>Оставьте свою оценку</h6>
         <p>
             <a href="{% url 'users:login' %}?next={{ request.path }}">Войдите в аккаунт</a> или
             <a href="{% url 'users:signup' %}?next={{ request.path }}">зарегистрируйтесь</a>, чтобы
@@ -56,6 +61,13 @@
 
     <script>
         let ratingField = document.getElementById('{{ rating_form.score.auto_id }}')
+
+        function deleteRating() {
+            ratingField.selectedIndex = 0;
+            document.getElementById('stars').innerHTML = ''
+            document.getElementById('ratingForm').submit()
+        }
+
 
         document.getElementById('stars').innerHTML = ''
         for (let step = 0; step < ratingField.value; step++) {

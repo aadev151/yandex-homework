@@ -1,8 +1,9 @@
-from catalog.models import Item
-from django.http import HttpResponseNotFound
+from django.db.models import Avg, Count
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from django.views.generic import ListView, View
+
+from catalog.models import Item
 from rating.forms import RatingForm
 from rating.models import Rating
 
@@ -17,39 +18,33 @@ class ItemListView(ListView):
 class ItemDetailView(View):
     def get(self, request, pk):
         template = 'catalog/item.html'
-        item = get_object_or_404(Item, pk=pk)
+        item = get_object_or_404(Item.objects.images(), pk=pk)
 
-        if not item:
-            return HttpResponseNotFound("it's 404 lol :)")
-
-        initial_data = {}
-
-        try:
-            initial_data['score'] = Rating.objects.get(
-                user_id=request.user.id
-            ).score
-        except Rating.DoesNotExist:
-            initial_data['score'] = None
-
-        rating_form = RatingForm(
-            request.POST or None,
-            initial=initial_data,
+        ratings = item.rating.aggregate(
+            avg=Avg('score'),
+            total=Count('score')
         )
-
-        rating_queryset = Rating.objects.filter(item=item, score__isnull=False)
-        all_ratings = list(map(lambda rating: rating.score, rating_queryset))
-
-        if len(all_ratings) != 0:
-            average = sum(all_ratings) / len(all_ratings)
-        else:
-            average = '0.0'
 
         context = {
             'item': item,
-            'rating_form': rating_form,
-            'average': average,
-            'total': len(all_ratings),
+            'average': ratings['avg'] or '0.0',
+            'total': ratings['total'],
         }
+
+        if request.user.is_authenticated:
+            initial_data = {}
+            try:
+                initial_data['score'] = item.rating.get(
+                    user__id=request.user.id
+                ).score
+            except Rating.DoesNotExist:
+                initial_data['score'] = None
+
+            rating_form = RatingForm(
+                initial=initial_data,
+            )
+
+            context['rating_form'] = rating_form
 
         return render(request, template, context=context)
 
@@ -64,7 +59,11 @@ class ItemDetailView(View):
             user=request.user,
         )
 
-        rating.score = rating_form.cleaned_data['score']
-        rating.save()
+        new_score = rating_form.cleaned_data['score']
+        if new_score:
+            rating.score = new_score
+            rating.save()
+        else:
+            rating.delete()
 
         return redirect(reverse('users:profile'))
