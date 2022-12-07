@@ -49,15 +49,6 @@ class UpdateUserForm(forms.ModelForm, AuthForm):
         })
 
 
-# class UpdateProfileForm(forms.ModelForm, AuthForm):
-#     class Meta:
-#         model = Profile
-#         fields = ('birthday',)
-#         widgets = ({
-#             'birthday': forms.DateInput(attrs={'type': 'date'})
-#         })
-
-
 class BootstrapLoginForm(AuthenticationForm, AuthForm):
     pass
 
