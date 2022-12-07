@@ -1,6 +1,5 @@
 from django.db.models import Avg, Count
 from django.shortcuts import get_object_or_404, redirect, render
-from django.urls import reverse
 from django.views.generic import ListView, View
 
 from catalog.models import Item
@@ -61,4 +60,4 @@ class ItemDetailView(View):
         else:
             rating.delete()
 
-        return redirect(reverse('users:profile'))
+        return redirect('catalog:item', pk=pk)
