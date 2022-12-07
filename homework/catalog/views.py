@@ -17,13 +17,8 @@ class ItemListView(ListView):
 
 class ItemDetailView(View):
     def get(self, request, pk):
-        template = 'catalog/item.html'
         item = get_object_or_404(Item.objects.images(), pk=pk)
-
-        ratings = item.rating.aggregate(
-            avg=Avg('score'),
-            total=Count('score')
-        )
+        ratings = item.rating.aggregate(avg=Avg('score'), total=Count('score'))
 
         context = {
             'item': item,
@@ -46,7 +41,7 @@ class ItemDetailView(View):
 
             context['rating_form'] = rating_form
 
-        return render(request, template, context=context)
+        return render(request, 'catalog/item.html', context=context)
 
     def post(self, request, pk):
         rating_form = RatingForm(request.POST)
