@@ -1,3 +1,4 @@
+from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 
 from catalog.models import Item
@@ -15,6 +16,7 @@ class Rating(models.Model):
     score = models.PositiveSmallIntegerField(
         choices=SCORE_CHOICES,
         verbose_name='Оценка. От 1 до 5, где 1 - "ненависть", 5 - "любовь"',
+        validators=[MinValueValidator(1), MaxValueValidator(5)],
         null=True,
         blank=True,
     )
@@ -26,7 +28,6 @@ class Rating(models.Model):
     user = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
-        related_name='user',
     )
 
     class Meta:
